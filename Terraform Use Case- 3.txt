@@ -1,0 +1,56 @@
+Terraform:-
+======================
+
+
+ access_key  = "AKIARJTF7JBDULL3UY5V"
+ secret_key  = "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"
+
+
+
+
+ /usr/bin --unzip terraform file is moved in this location
+ 
+ mv terraform /usr/bin
+ terraform -version
+ 
+ then cd /opt/
+ mkdir lambdademo/
+ cd lambdademo/
+ 
+
+TGI requirement US 1)-
+
+launch ec2-instance with SG only allow port 22  or 80
+
+
+US-2:-
+
+s3 bucket create and versining enabled and should have bucket policy-any policy.
+ 
+ 
+Use Case- 3:-
+
+existing/ new  bucket apply the policy for json and attach 
+
+create a vpc to terraform  creare subnet and attach the ec2 instance to this vpc 
+
+https://www.youtube.com/watch?v=Rjj4nBYf2P8
+
+
+
+ mihir whats app no:- 8793553175-whats app
+ 
+ 
+Use Case- 4:-(terraform archive provider is used to zip the file)
+ 
+ create a lambda function by using terraform
+ 
+ https://www.youtube.com/watch?v=6FA3h7_0-68
+ 
+ 
+Use Case- 5:-
+
+IAM - create a IAM polices, ACL by using terraform
+ 
+ 
+ 

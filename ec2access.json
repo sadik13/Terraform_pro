@@ -1,0 +1,22 @@
+{
+	"version" : "2012-10-17",
+	"id" : "mypolicy",
+	"statement" : "[
+		"Sid" : "IPAllow",
+		"Effect" : "Allow",
+		"principal" : "*",
+		"Action" : "Ec2:read",
+		"Resource" : [
+	           "aws_Ec2.arn",
+		   "${aws_ec2.arn}/read"
+
+		],
+               "condition" : {
+		       "IpAddress" : {
+			       "aws.SourceIp" : "115.98.171.118"
+		       }
+	       }
+
+	]
+}
+

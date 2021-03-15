@@ -1,0 +1,79 @@
+Terraform:-
+
+https://www.youtube.com/watch?v=Fc5c1o9VMUM
+
+
+ access_key  = "AKIARJTF7JBDULL3UY5V"
+ secret_key  = "lJ7ST6THAljz2fL+LOsNidOEnrqV2nEIgJYxO09j"
+
+
+TGI requirement 1)-
+
+launch ec2-instance with SG only allow port 22  or 80
+
+sample code for launch the ec2 instance in narthen virginia region:-(main.tf)
+==================================================================================
+provider "aws" {
+access_key = "AKIARJTF7JBDULL3UY5V" (or) var.access_key
+secret_key = "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" (or)  var.secret_key
+region = "us-east-1"
+}
+
+resource "aws_instance" "terraform" {
+  ami           = "ami-0915bcb5fa77e4892"
+  instance_type = "t2.micro"
+  key_name      = "public_key_pair"
+  tags = {
+    Name = "terraform-instance"
+  }
+}
+===================================================================================
+
+example-inputs.tf
+
+variable access_key {
+type = string
+}
+
+variable secret_key {
+type = string
+}
+
+===========================================
+sensitive.tfvars:-
+
+region = "us-east-1"
+
+===========================
+terraform apply -var-file="sensitive.tfvars"
+
+
+
+-----------------------------------------------
+
+Output EC2 instance configuration:-
+=========================================
+
+output "instance_id" {
+  description = "ID of the EC2 instance"
+  value       = aws_instance.example.id
+}
+
+output "instance_public_ip" {
+  description = "Public IP address of the EC2 instance"
+  value       = aws_instance.example.public_ip
+}
+-------------------------------------------
+terraform apply
+
+terraform output
+
+instance_id = "i-0bf954919ed765de1"
+instance_public_ip = "54.186.202.254"
+
+--------============================================
+
+terraform destroy
+
+
+

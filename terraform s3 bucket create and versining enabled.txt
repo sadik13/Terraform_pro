@@ -1,0 +1,57 @@
+US-2:-
+
+s3 bucket create and versining enabled and should have bucket policy-any policy.
+
+provider "aws" {
+access_key =  var.access_key
+secret_key =  var.secret_key
+region     =  "us-east-1"
+}
+
+resource "aws_s3_bucket" "bkt" {
+  bucket = "my-terrafm-test-bucket"
+  acl    = "private"
+
+  versioning {
+    enabled = true
+  }
+}
+
+# Apply the bucket policy to deny the ip address to access the bucket contents/objects
+
+resource "aws_s3_bucket_policy" "bkt" {
+  bucket = aws_s3_bucket.bkt.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Id      = "MYBUCKETPOLICY"
+    Statement = [
+      {
+        Sid       = "IPAllow"
+        Effect    = "Deny"
+        Principal = "*"
+        Action    = "s3:*"
+        Resource = [
+          aws_s3_bucket.bkt.arn,
+          "${aws_s3_bucket.bkt.arn}/*",
+        ]
+        Condition = {
+          IpAddress = {
+            "aws:SourceIp" = "115.98.171.118"
+          }
+        }
+      },
+    ]
+  })
+}
+
+=================================== inputs.tf==============
+
+variable access_key {
+type = string
+}
+
+variable secret_key {
+type = string
+}
+

@@ -1,0 +1,60 @@
+usecase 3.i)
+create a bucket and create a policy json file and attach the eternal policy file to newly created bucket by using terraform.
+
+solution:-
+
+===========bkt_creation.tf=================
+provider "aws" {
+access_key =  var.access_key
+secret_key =  var.secret_key
+region     =  "us-east-1"
+}
+
+resource "aws_s3_bucket" "bkt" {
+  bucket = "my-terrafm-test2-bucket"
+  acl    = "private"
+
+}
+
+resource "aws_s3_bucket_policy" "bkt" {
+  bucket = aws_s3_bucket.bkt.id
+
+policy   = file("bucket-policy.json")
+
+}
+======================================================
+
+=====================bucket-policy.json=============
+
+{
+    "Version" : "2012-10-17",
+    "Id"      : "MYBUCKETPOLICY",
+    "Statement" : [
+      {
+        "Sid"       : "IPAllow",
+        "Effect"    : "Allow",
+        "Principal" : "*",
+        "Action"    : "s3:*",
+        "Resource"  : [
+          "aws_s3_bucket.bkt.arn",
+          "${aws_s3_bucket.bkt.arn}/*"
+        ],
+        "Condition"        : {
+          "IpAddress"      : {
+            "aws:SourceIp" : "115.98.171.118"
+          }
+        }
+      }
+    ]
+  }
+===========================================================
+
+=======vars.tf=========================================
+variable access_key {
+type = string
+}
+
+variable secret_key {
+type = string
+}
+===========================================================
