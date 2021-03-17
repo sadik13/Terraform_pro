@@ -2,12 +2,6 @@ Terraform:-
 ======================
 
 
- access_key  = "AKIARJTF7JBDULL3UY5V"
- secret_key  = "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"
-
-
-
-
  /usr/bin --unzip terraform file is moved in this location
  
  mv terraform /usr/bin
