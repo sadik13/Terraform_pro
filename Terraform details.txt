@@ -10,8 +10,8 @@ launch ec2-instance with SG only allow port 22  or 80
 sample code for launch the ec2 instance in narthen virginia region:-(main.tf)
 ==================================================================================
 provider "aws" {
-access_key = "AKIARJTF7JBDULL3UY5V" (or) var.access_key
-secret_key = "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" (or)  var.secret_key
+access_key =  var.access_key
+secret_key =  var.secret_key
 region = "us-east-1"
 }
 
