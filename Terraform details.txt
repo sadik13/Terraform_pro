@@ -3,10 +3,6 @@ Terraform:-
 https://www.youtube.com/watch?v=Fc5c1o9VMUM
 
 
- access_key  = "AKIARJTF7JBDULL3UY5V"
- secret_key  = "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"
-
-
 TGI requirement 1)-
 
 launch ec2-instance with SG only allow port 22  or 80
